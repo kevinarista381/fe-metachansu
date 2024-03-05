@@ -15,10 +15,10 @@ const CardComponent = (props) => {
       <ItemImageWrapper>
         <ItemImage src={image ? `data:image/png;base64, ${image}` : noimg} />
       </ItemImageWrapper>
-      <ItemNameWrapper>{name}</ItemNameWrapper>
+      <ItemNameWrapper>{name ?? "-"}</ItemNameWrapper>
       <ItemDetailWrapper>
-        <div>Price: {price} ED ea</div>
-        <div>Available stock: {stock}</div>
+        <div>Price: {price ?? "-"} ED ea</div>
+        <div>Available stock: {stock ?? "-"}</div>
       </ItemDetailWrapper>
 
       <Button width={60} height={10}>
