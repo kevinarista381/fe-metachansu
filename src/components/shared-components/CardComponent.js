@@ -4,14 +4,15 @@ import styled from "styled-components";
 import noimg from "../../img/ui/noimage.png";
 import Button from "./Button";
 
-import { useGetIsMobile } from "../../helpers/ScreenSize";
+import { useGetIsMobile, useGetIsTablet } from "../../helpers/ScreenSize";
 
 const CardComponent = (props) => {
   let { name, price, stock, image } = props;
 
   let isMobile = useGetIsMobile();
+  let isTablet = useGetIsTablet();
   return (
-    <CardWrapper $isMobile={isMobile}>
+    <CardWrapper $screenType={{ isMobile, isTablet }}>
       <ItemImageWrapper>
         <ItemImage src={image ? `data:image/png;base64, ${image}` : noimg} />
       </ItemImageWrapper>
@@ -35,10 +36,16 @@ let CardWrapper = styled.div`
   border-radius: 15px;
   border: 2px solid #e6f7f7;
   margin-left: 2%;
-  margin-right: 2%;
+  margin-right: ${({ $screenType }) =>
+    $screenType.isTablet || $screenType.isMobile ? "2%" : "auto"};
   margin-bottom: 3%;
-  min-width: ${(props) => (props.$isMobile ? "50vw" : "15vw")};
-  min-height: 35vh;
+  width: ${({ $screenType }) => {
+    if ($screenType.isTablet) return "30vw";
+    if ($screenType.isMobile) return "50vw";
+    return "15vw";
+  }};
+  max-height: 35%;
+  padding-bottom: 2%;
 `;
 
 let ItemImageWrapper = styled.div`
