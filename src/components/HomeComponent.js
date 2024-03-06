@@ -4,21 +4,21 @@ import styled from "styled-components";
 import CardComponent from "./shared-components/CardComponent";
 import Section from "./shared-components/Section";
 
-import { useGetIsMobile } from "../helpers/ScreenSize";
+import { useGetIsMobile, useGetIsTablet } from "../helpers/ScreenSize";
 import { useFetchApi } from "../helpers/FetchApi";
 
 const HomeComponent = () => {
   let isMobile = useGetIsMobile();
+  let isTablet = useGetIsTablet();
   let data = useFetchApi({
     method: "GET",
     path: "/product",
   });
-  console.log(data);
 
   return (
     <ContentContainer>
       <Section title="Hot Items">
-        <CardContainer $isMobile={isMobile}>
+        <CardContainer $screenType={{ isMobile, isTablet }}>
           {data?.map((item, index) => (
             <CardComponent
               key={`Hot-items-${index}`}
@@ -54,7 +54,12 @@ let ContentContainer = styled.div`
 let CardContainer = styled.div`
   display: flex;
   flex-flow: row wrap;
-  justify-content: ${(props) => (props.$isMobile ? "center" : "space-between")};
+  justify-content: ${({ $screenType }) => {
+    if ($screenType?.isTablet) return "space-evenly";
+    if ($screenType?.isMobile) return "center";
+    return "space-between";
+  }};
+
   margin-left: 4%;
   margin-right: 4%;
 `;

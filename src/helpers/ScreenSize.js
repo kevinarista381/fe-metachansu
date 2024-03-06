@@ -5,7 +5,7 @@ let getScreenSize = () => {
   return { width, height };
 };
 
-export const useGetScreenSize = () => {
+let useGetScreenSize = () => {
   const [screenSize, setscreenSize] = useState(getScreenSize());
 
   useEffect(() => {
@@ -19,3 +19,7 @@ export const useGetScreenSize = () => {
 };
 
 export const useGetIsMobile = () => useGetScreenSize().width <= 720;
+export const useGetIsTablet = () => {
+  let width = useGetScreenSize().width;
+  return width <= 1000 && width > 720;
+};
