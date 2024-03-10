@@ -22,7 +22,7 @@ const CardComponent = (props) => {
         <div>Available stock: {stock ?? "-"}</div>
       </ItemDetailWrapper>
 
-      <Button width={60} height={10}>
+      <Button width={60} height={isMobile ? 12 : 15}>
         Add to Cart
       </Button>
     </CardWrapper>

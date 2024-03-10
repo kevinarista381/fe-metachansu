@@ -1,10 +1,12 @@
 import React from "react";
+import styled from "styled-components";
+
+import HomeComponent from "./HomeComponent";
+import LoginModal from "./shared-components/LoginModal";
+import Navbar from "./Navbar";
 
 import background from "../img/decor/star.png";
 import contactus from "../img/ui/contactus.png";
-import HomeComponent from "./HomeComponent";
-import Navbar from "./Navbar";
-import styled from "styled-components";
 
 function MainComponent() {
   return (
@@ -18,6 +20,8 @@ function MainComponent() {
         </div>
 
         <HomeComponent />
+
+        <LoginModal visible={true} />
 
         <div className="footer">
           <div>This is the footer</div>

@@ -20,10 +20,10 @@ const Navbar = () => {
 
           <form>
             <SearchBar>
-              <input
+              <SearchInput
                 type="text"
                 placeholder="Type in the item you're looking for"
-              ></input>
+              ></SearchInput>
               <Button width={10} height={50} type="submit">
                 <i className="fa fa-search"></i>
               </Button>
@@ -101,4 +101,10 @@ let SearchBar = styled.div`
   justify-content: center;
   align-items: center;
   height: 10vh;
+`;
+
+let SearchInput = styled.input`
+  width: 60%;
+  height: 50%;
+  margin-right: 1%;
 `;

@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 const Button = (props) => {
-  let { width, height } = props;
+  let { width, height, onClick } = props;
   return (
-    <GeneralButton $width={width} $height={height}>
+    <GeneralButton $width={width} $height={height} onClick={onClick}>
       {props.children}
     </GeneralButton>
   );
