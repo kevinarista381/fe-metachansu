@@ -18,7 +18,7 @@ export const useFetchApi = (props) => {
         return result.data;
       }
     } catch (error) {
-      window.alert(`An error occuered: ${error.message}`);
+      window.alert(`An error occurred: ${error.message}`);
     }
   });
   return currentData;

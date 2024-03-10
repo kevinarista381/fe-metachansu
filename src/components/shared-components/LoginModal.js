@@ -1,10 +1,11 @@
 import React, { useCallback, useState } from "react";
-import bcrypt from "bcryptjs-react";
+import { sha256 } from "js-sha256";
 import styled from "styled-components";
 
 import Button from "./Button";
 
 import { useGetIsMobile, useGetIsTablet } from "../../helpers/ScreenSize";
+import { RequestHandler } from "../../helpers/RequestHandler";
 
 const Modal = (props) => {
   let { visible } = props;
@@ -16,8 +17,17 @@ const Modal = (props) => {
   let isTablet = useGetIsTablet();
 
   let handleLogin = useCallback(async () => {
-    let hashedPw = await bcrypt.hash(password, 10);
-    console.log(hashedPw);
+    let hashedPw = sha256(password);
+
+    try {
+      await RequestHandler("post", "/login", {
+        userName,
+        password: hashedPw,
+      });
+      window.alert("Gz! Login succesful!");
+    } catch (err) {
+      window.alert(`An error occured: ${err.message}`);
+    }
   });
 
   return (
