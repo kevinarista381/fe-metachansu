@@ -26,12 +26,18 @@ const Modal = (props) => {
         <ModalTitle>Login</ModalTitle>
         <InputGroup>
           <div>Username</div>
-          <FormInput onChange={(e) => setUserName(e.target.value)}></FormInput>
+          <FormInput
+            onChange={(e) => setUserName(e.target.value)}
+            type="text"
+          ></FormInput>
         </InputGroup>
 
         <InputGroup>
           <div>Password</div>
-          <FormInput onChange={(e) => setPassword(e.target.value)}></FormInput>
+          <FormInput
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+          ></FormInput>
         </InputGroup>
 
         <ButtonWrapper>
