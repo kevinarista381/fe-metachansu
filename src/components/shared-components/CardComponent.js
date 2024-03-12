@@ -44,8 +44,8 @@ let CardWrapper = styled.div`
     if ($screenType.isMobile) return "50vw";
     return "15vw";
   }};
-  max-height: 35%;
-  padding-bottom: 2%;
+  max-height: 100%;
+  padding-bottom: 4vh;
 `;
 
 let ItemImageWrapper = styled.div`

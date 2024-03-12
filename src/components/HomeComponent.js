@@ -10,10 +10,7 @@ import { useFetchApi } from "../helpers/FetchApi";
 const HomeComponent = () => {
   let isMobile = useGetIsMobile();
   let isTablet = useGetIsTablet();
-  let data = useFetchApi({
-    method: "GET",
-    path: "/product",
-  });
+  let data = useFetchApi("/product");
 
   return (
     <ContentContainer>
@@ -32,7 +29,7 @@ const HomeComponent = () => {
       </Section>
 
       <Section title="Selling">
-        <CardContainer>
+        <CardContainer $screenType={{ isMobile, isTablet }}>
           <CardComponent />
         </CardContainer>
       </Section>
@@ -51,15 +48,36 @@ let ContentContainer = styled.div`
   background-color: #e3ccdd;
 `;
 
-let CardContainer = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: ${({ $screenType }) => {
-    if ($screenType?.isTablet) return "space-evenly";
-    if ($screenType?.isMobile) return "center";
-    return "space-between";
-  }};
+// let CardContainer = styled.div`
+//   display: flex;
+//   flex-flow: row wrap;
+//   justify-content: ${({ $screenType }) => {
+//     if ($screenType?.isTablet) return "space-evenly";
+//     if ($screenType?.isMobile) return "center";
+//     return "space-between";
+//   }};
 
+//   margin-left: 4%;
+//   margin-right: 4%;
+// `;
+
+let CardContainer = styled.div`
   margin-left: 4%;
   margin-right: 4%;
+  ${({ $screenType }) => {
+    if ($screenType?.isTablet || $screenType?.isMobile) {
+      return `
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: ${$screenType?.isTablet ? "space-evenly" : "center"};
+  
+   `;
+    }
+    return `
+    display: grid;
+    grid-template-columns: repeat(4, minmax(auto, 1fr));
+    grid-row-gap: 3vh;
+    grid-column-gap: 5vw;
+    `;
+  }}
 `;

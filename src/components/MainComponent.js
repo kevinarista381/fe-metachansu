@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import HomeComponent from "./HomeComponent";
@@ -7,13 +7,23 @@ import Navbar from "./Navbar";
 
 import background from "../img/decor/star.png";
 import contactus from "../img/ui/contactus.png";
+import { useGetUserData } from "../helpers/UserData";
 
 function MainComponent() {
+  let user = useGetUserData();
+
+  const [userName, setUserName] = useState(user?.firstName);
+
   return (
     <div>
       <BackgroundImage src={background} />
       <div className="frame">
         <Navbar />
+        {userName && (
+          <WelcomeMessage>
+            <h1>Welcome, {userName.toUpperCase()}</h1>
+          </WelcomeMessage>
+        )}
 
         <div className="contactus">
           <img src={contactus} />
@@ -21,7 +31,7 @@ function MainComponent() {
 
         <HomeComponent />
 
-        <LoginModal visible={true} />
+        <LoginModal onLogin={setUserName} />
 
         <div className="footer">
           <div>This is the footer</div>
@@ -43,4 +53,8 @@ let BackgroundImage = styled.img`
   z-index: -1;
   max-height: 100vh;
   margin: auto;
+`;
+
+let WelcomeMessage = styled.div`
+  color: white;
 `;

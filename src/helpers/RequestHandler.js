@@ -1,4 +1,3 @@
-import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 
 export const RequestHandler = async (method, path, data) => {
@@ -9,5 +8,5 @@ export const RequestHandler = async (method, path, data) => {
     data,
   });
 
-  return res;
+  return res?.data;
 };
